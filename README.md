@@ -1,19 +1,9 @@
-generator-kraken
+generator-blst
 ================
-
-Lead Maintainer: [Matt Edelmann](https://github.com/grawk)
-
-[![Build Status](https://travis-ci.org/krakenjs/generator-kraken.svg?branch=v1.1.2)](https://travis-ci.org/krakenjs/generator-kraken)
-[![NPM version](https://badge.fury.io/js/generator-kraken.png)](http://badge.fury.io/js/generator-kraken)
-[![Dependencies Status](https://david-dm.org/krakenjs/generator-kraken.png)](https://david-dm.org/krakenjs/generator-kraken)
-[![DevDependencies Status](https://david-dm.org/krakenjs/generator-kraken/dev-status.png)](https://david-dm.org/krakenjs/generator-kraken#info=devDependencies)
 
 Generator for scaffolding :
 - static websites
 - Koa APIs
-
-
-
 
 ## Getting Started
 
@@ -32,26 +22,9 @@ $ yo blst
 ### Generators
 
 `$ yo blst [myApp]`
-Creates a new blst application. Parameters:
+Creates a new blst application (static website or Koa API).
 
-    --templateModule - (Optional) Set the template module
-    --cssModule - (Optional) Set the CSS module
-    --jsModule - (Optional) Set the JavaScript module
-
-
-`$ yo kraken:controller myController`
-Generates a new controller namespace called *myController* and it's dependencies.
-
-`$ yo kraken:model myModel`
-Generates a new model named *myModel*.
-
-`$ yo kraken:template myTemplate`
-Generates a new template named *myTemplate* and it's dependencies.
-
-`$ yo kraken:locale myFile [myCountry myLang]`
-Generates a new content bundle named *myFile*.
-
-
+TODO
 
 
 ## Learning Your Way Around
@@ -59,17 +32,19 @@ Generates a new content bundle named *myFile*.
 Once installed, you can create a basic application by following the prompts.
 
 ```shell
-$ yo kraken
+$ yo blst
 
-     ,'""`.
-    / _  _ \
-    |(@)(@)|   Release the Kraken!
-    )  __  (
-   /,'))((`.\
-  (( ((  )) ))
-   `\ `)(' /'
+      /\   /\   /\
+     /  \ /  \ /  \
+    /    \    \    \
+   /  /\  \/\  \/\  \   Let's hack!
+  /  /  \  \ \  \ \  \
+ /  /____\  \_\  \_\  \
+/____________\____\____\
 
-[?] Application name: HelloWorld
+Tell me a bit about your application:
+
+[?] Name: HelloWorld
 ...
 ```
 
@@ -78,133 +53,37 @@ To run your application, just go into the newly created directory and type `npm 
 ```shell
 $ cd HelloWorld
 $ npm start
-
-> helloworld@0.0.1 start ~/HelloWorld
-> node index.js
-
-Listening on 8000
 ```
 
 
-### Project Structure
+## Projects Structure
 
-- **/config/** - Application and middleware configuration
-- **/controllers/** - Application routes
-- **/locales/** - Country/language specific content bundles
-- **/models/** - Controller models
-- **/public/** - Web resources that are publicly available
-- **/public/templates/** - Server and browser-side templates
-- **/tests/** - Unit and functional test cases
+### Koa API
+
+- **/api/** - All your API's resources (web controllers)
+- **/bin/** - Binary that start your API
+- **/config/** - All your configuration
+- **/db/** - Db management folder
+- **/db/seeds** - Db fake data files
+- **/db/migrations** - Db versioning files
+- **/lib/** - Scripts that init your API
+- **/models/** - Your db models
+- **/scripts/** - POJO for tasks you might want to use only once.
+- **/services/** - POJO for extractable behaviour.
+- **/tests/** - Unit test cases (fonctionnal are in api/**/test.js)
+- **/knexfile.js** - Your database config file
 - **/index.js** - Application entry point
 
+### Static website
 
-### Configuration
-
-Application configuration can be found in `/config/config.json`.
-
-Different environment configuration can be loaded by creating an alternate file with the environment, e.g. `./config/development.json`. You can control which file is loaded by defining an environment variable, `NODE_ENV`, and setting its value to `production` or `development`.
-
-
-
-### Controllers
-
-Route logic is moved into the `/controllers/` directory.
-
-For example, a route for your home page, would use a `/controllers/index.js` file such as:
-
-```js
-'use strict';
-
-var IndexModel = require('../models/index');
-
-module.exports = function (router) {
-    var model = new IndexModel();
-
-    router.get('/', function (req, res) {
-        res.render('index', model);
-    });
-};
-```
-
-This file would define the routes and the logic for the home page. The advantage of keeping routes and logic segregated in individual files starts to show as the application grows. If something fails, it's very easy to pinpoint where things went wrong.
-
-When a new controller is created, the generator will also create a template, locale file, and model for you.
-
-##### :warning: **New in kraken 1.x**
-
-Kraken 1.x now leverages [express 4](http://www.expressjs.com) and, most notably, passes a [router](http://expressjs.com/4x/api.html#router) into your controllers.
-
-Additionally, routes are now—by default—automatically determined for you based on directory structure. For example, if we wanted to have a number of routes that start with `/users`, we could simply create a `/controllers/users/index.js` file with the following contents:
-
-```js
-'use strict';
-
-module.exports = function (router) {
-    // note that we don't need to specify "/users"
-    router.get('/', function (req, res) {
-        res.send('You can find me at /users');
-    });
-
-    router.get('/new', function (req, res) {
-        res.send('You can find me at /users/new');
-    });
-}
-
-```
-
-Calling `yo kraken:controller users` would be enough to generate the basis for that file. Want to register routes that begin with `/users/all`? `yo kraken:controller users/all` is the command you're looking for.
-
-Route registration is highly customizable. If you're interested in trying a different behavior, be sure to check out the module that takes care of it in kraken: [express-enrouten](https://github.com/krakenjs/express-enrouten).
-
-### Models
-
-Data models are separated from the controller logic resulting in cleaner, more organized code. Data models live in the `/models/` folder.
-
-```js
-'use strict';
-
-module.exports = function IndexModel() {
-    return {
-        name: 'myApp'
-    };
-};
-```
-
-While not very complex, this model serves as a base to build upon.
-
-
-
-### Templates
-
-[Dust JavaScript templates](https://github.com/linkedin/dustjs) are the default templating language.
-
-Templates are loaded from the `/public/templates/` directory. Since they exist in the public folder the application can render the same templates on the server side as well as the client side.
-
-
-### Localized Content
-
-When using Dust for it's templating, the application is able to load localized templates. If we wanted to greet a user in their native language, we would simply add this context to the response before rendering the template:
-
-```js
-function (req, res) {
-	res.locals.context = { locality: 'es_ES' };
-
-	res.render('index', {
-	    name: 'Antonio Banderas'
-	});
-}
-```
-
-We would also change our template as follows, using a `@pre` content tag:
-
-```html
-<h1>{@pre type="content" key="index.greeting"/}</h1>
-```
-
-This instructs the application to pick up the `index.greeting` string from the appropriate locale content bundle in the `/locales/` directory, in this case `/locales/ES/es/`.
-
-
-
+- **/fonts/** - Your website's fonts
+- **/img/** - The images of your app (compressed at build time)
+- **/js/** - The front-end js code
+- **/locale/** - The language files (it is not mandatory to use them)
+- **/pages/** - All your pages
+- **/pages/partials/** - The partials you can use in your templates (head, footer...)
+- **/scss/** - Your scss, ready to be transpiled
+- **/gulpfile.js - The configuration of your gulpfile (which is then sent to the `blaaast-build-pipeline` npm module)
 
 ## License
 

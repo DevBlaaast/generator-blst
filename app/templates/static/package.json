@@ -8,6 +8,7 @@
     "blaaast-build-pipeline": "DevBlaaast/blaaast-build-pipeline"
   },
   "scripts": {
+    "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

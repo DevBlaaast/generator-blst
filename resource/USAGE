@@ -1,0 +1,10 @@
+Description:
+    Creates a new resource.
+
+Example:
+    yo blst:resource <name>
+
+    This will create:
+        api/<name>/config.json: Your resource's config file.
+        api/<name>/index.js: Your resource.
+        api/<name>/test.js: Your resource's tests.

@@ -1,0 +1,9 @@
+{
+  "name": "stats",
+  "description": "api statistics",
+  "routes": {
+    "GET /stats             ": "all",
+    "GET /stats/:name       ": "get",
+    "HEAD /stats/acv  public": "acv"
+  }
+}

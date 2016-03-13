@@ -1,0 +1,4 @@
+{
+  "name": "<%= resourceName %>",
+  "description": "<%= resourceName %> resource"
+}

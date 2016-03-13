@@ -1,0 +1,2 @@
+dropdb hiring-ticket
+PGUSER=tom PGPASSWORD=tom heroku pg:pull HEROKU_POSTGRESQL_MAROON hiring-ticket --app hiring-ticket-api

@@ -1,0 +1,11 @@
+{
+  "name": "authentication",
+  "description": "api authentication",
+  "routes": {
+    "POST /authentication/revoke              ": "revoke",
+    "POST /authentication/token         public": "token",
+    "POST /authentication/social/token  public": "social",
+    "POST /send-reset                   public": "sendReset",
+    "POST /reset-password               public": "reset"
+  }
+}

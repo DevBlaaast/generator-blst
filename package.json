@@ -1,0 +1,44 @@
+{
+  "name": "generator-blst",
+  "version": "0.1.0",
+  "description": "A blst generator for Yeoman",
+  "keywords": [
+    "yeoman-generator",
+    "yeoman",
+    "blst",
+    "blaaast"
+  ],
+  "homepage": "https://github.com/devblaaast/generator-blst",
+  "bugs": "https://github.com/devblaaast/generator-blst/issues",
+  "author": {
+    "name": "Tom Coquereau",
+    "email": "tom@blaaast.co",
+    "url": "https://github.com/thaume"
+  },
+  "contributors": [],
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/devblaaast/generator-blst.git"
+  },
+  "scripts": {
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha -- test/*.js"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "mkdirp": "^0.5.1",
+    "update-notifier": "^0.6.1",
+    "yeoman-generator": "^0.22.5"
+  },
+  "devDependencies": {
+    "istanbul": "^0.3.7",
+    "mocha": "^2.2.1",
+    "resolve": "^1.1.5",
+    "yo": "^1.4.7"
+  },
+  "engines": {
+    "npm": "^3.0.0"
+  },
+  "license": "MIT"
+}

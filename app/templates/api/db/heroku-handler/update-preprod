@@ -1,0 +1,2 @@
+heroku pgbackups:capture --expire --app paper-chain
+heroku pgbackups:restore DATABASE `heroku pgbackups:url --app paper-chain` --app paper-chain-preprod --confirm paper-chain-preprod

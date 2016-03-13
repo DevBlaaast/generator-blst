@@ -10,6 +10,7 @@ blstutil.update();
 const debug = require('debug')('generator-blst');
 
 module.exports = yeoman.Base.extend({
+
   initializing: function () {
     blstutil.banner();
     this.argument('name', { type: String, required: false });
@@ -25,7 +26,7 @@ module.exports = yeoman.Base.extend({
 
       // Handle setting the root early, so .yo-rc.json ends up the right place.
       this.prompt([{
-        message: 'Name',
+        message: 'What is your application name ?',
         name: 'name',
         validate: function (str) {
           return !!str;
@@ -114,9 +115,6 @@ module.exports = yeoman.Base.extend({
   install: {
 
     installNpm: function installNpm() {
-      if (this.options['skip-install-npm']) {
-        return;
-      }
 
       if (this.config.get('appKind') === 'static') {
         this.npmInstall();
@@ -126,6 +124,7 @@ module.exports = yeoman.Base.extend({
       if (this.config.get('appKind') === 'api') {
         this.npmInstall();
       }
+
     }
 
   },

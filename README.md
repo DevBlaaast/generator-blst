@@ -1,8 +1,8 @@
-generator-blst
-================
+Blaaast apps generator
+======================
 
 Generator for scaffolding :
-- static websites
+- Static websites
 - Koa APIs
 
 ## Getting Started

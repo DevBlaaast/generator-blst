@@ -44,8 +44,10 @@ $ yo blst
 
 Tell me a bit about your application:
 
-[?] Name: HelloWorld
-...
+? What is your application name ? HelloWorld
+? Add a description for your app : The website for HelloWorld
+? Who is the author of this app ? John DOe
+? Is it a static website or a Koa API ? A static website
 ```
 
 To run your application, just go into the newly created directory and type `npm start`.
